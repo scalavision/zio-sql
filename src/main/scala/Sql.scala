@@ -83,6 +83,7 @@ trait Sql {
     def typeTag: TypeTag[A] = implicitly[TypeTag[A]]
   }
   object Column {
+    def boolean(name: String): Column[Boolean] = Column[Boolean](name)
     def int(name: String): Column[Int] = Column[Int](name)
     def long(name: String): Column[Long] = Column[Long](name)
     def string(name: String): Column[String] = Column[String](name)

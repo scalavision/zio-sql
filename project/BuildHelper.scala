@@ -9,12 +9,14 @@ object BuildHelper {
     crossScalaVersions := Seq(Scala212, Scala213),
     scalaVersion in ThisBuild := Scala212,
     scalacOptions := stdOptions ++ extraOptions(scalaVersion.value),
+    scalacOptions --= Seq("-Yno-adapted-args", "-Ypartial-unification"),
     libraryDependencies ++=
       Seq(
+        "org.spartanz" %% "parserz" % "0.2.3",
         ("com.github.ghik" % "silencer-lib" % SilencerVersion % Provided)
           .cross(CrossVersion.full),
         compilerPlugin(("com.github.ghik" % "silencer-plugin" % SilencerVersion).cross(CrossVersion.full)),
-        compilerPlugin("org.typelevel" %% "kind-projector" % "0.10.3")
+        compilerPlugin(("org.typelevel" %% "kind-projector" % "0.11.0").cross(CrossVersion.full))
       ),
     incOptions ~= (_.withLogRecompileOnMacro(false))
   )
